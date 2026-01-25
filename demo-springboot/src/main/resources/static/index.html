@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 700px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        button {
+            background-color: #667eea;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        button:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .button-group {
+            margin-top: 30px;
+        }
+        #message {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            color: #667eea;
+            font-weight: bold;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Demo App</h1>
+        <div class="subtitle">Spring Boot Application</div>
+        <p>This is a simple home page for your Spring Boot application. Click the buttons below to interact with the application.</p>
+        
+        <div class="button-group">
+            <button onclick="handleClick()">Say Hello</button>
+            <button onclick="checkHealth()">Check Health</button>
+        </div>
+        
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function handleClick() {
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'none';
+            messageDiv.textContent = 'Hello! Welcome to the Spring Boot application.';
+            messageDiv.style.color = '#667eea';
+            messageDiv.style.display = 'block';
+        }
+        
+        function checkHealth() {
+            const messageDiv = document.getElementById('message');
+            
+            fetch('/api/health')
+                .then(response => response.text())
+                .then(data => {
+                    messageDiv.style.display = 'none';
+                    messageDiv.textContent = '✓ Application Status: ' + data;
+                    messageDiv.style.color = '#2e7d32';
+                    messageDiv.style.display = 'block';
+                })
+                .catch(error => {
+                    messageDiv.style.display = 'none';
+                    messageDiv.textContent = '✗ Error checking health: ' + error;
+                    messageDiv.style.backgroundColor = '#ffebee';
+                    messageDiv.style.color = '#c62828';
+                    messageDiv.style.display = 'block';
+                });
+        }
+    </script>
+</body>
+</html>
