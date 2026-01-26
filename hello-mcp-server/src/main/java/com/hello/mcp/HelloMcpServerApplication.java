@@ -1,4 +1,4 @@
-package com.example.mcp;
+package com.hello.mcp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
