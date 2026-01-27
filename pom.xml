@@ -19,12 +19,27 @@
 	<description>Parent project for Java projects</description>
 
 	<properties>
+		<java.version>25</java.version>
+		<spring-ai.version>1.1.2</spring-ai.version>
 	</properties>
 
 	<dependencyManagement>
-		<dependencies>
-		</dependencies>
-	</dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+			<dependency>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+				<version>${spring-ai.version}</version>
+			</dependency>
+        </dependencies>
+    </dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -69,12 +84,12 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<modules>
 		<module>demo-springboot</module>
 		<module>hello-mcp-server</module>
+		<module>arch-mcp-server</module>
 	</modules>
 
 </project>
