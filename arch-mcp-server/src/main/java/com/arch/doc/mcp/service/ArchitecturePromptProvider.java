@@ -2,6 +2,8 @@ package com.arch.doc.mcp.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springaicommunity.mcp.annotation.McpArg;
 import org.springaicommunity.mcp.annotation.McpComplete;
 import org.springaicommunity.mcp.annotation.McpPrompt;
@@ -16,6 +18,8 @@ import io.modelcontextprotocol.spec.McpSchema.TextContent;
 @Component
 public class ArchitecturePromptProvider {
 
+    private static final Logger logger = LoggerFactory.getLogger(ArchitecturePromptProvider.class);
+	
     @McpPrompt(
         name = "design-spring-microservice", 
         description = "Guides the AI to design a Spring Boot microservice following internal standards."
@@ -24,6 +28,8 @@ public class ArchitecturePromptProvider {
         @McpArg(name = "serviceName", description = "The name of the service (e.g., order-service)") String serviceName,
         @McpArg(name = "features", description = "List of features needed") String features) 
     {
+        logger.info("Generating prompt for microservice design: {} with features: {}", serviceName, features);
+        
         String template = """
             You are a Senior Spring Boot Architect. 
             Design a microservice named: %s.
@@ -51,7 +57,7 @@ public class ArchitecturePromptProvider {
      */
     @McpComplete(prompt = "design-spring-microservice")
     public List<String> completeTechStack(@McpToolParam(description  = "techStack") String prefix) {
-        List<String> approvedStacks = List.of("Spring-WebFlux-R2DBC", "Spring-MVC-JPA", "Kotlin-Micronaut");
+        List<String> approvedStacks = List.of("Spring-WebFlux-R2DBC", "Spring-MVC-JPA");
         
         return approvedStacks.stream()
                 .filter(s -> s.toLowerCase().startsWith(prefix.toLowerCase()))

@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
  * Integrates with AI editors for context-aware development assistance
  */
 @Service
-public class ArchitectureDocService {
+public class ArchitectureDocumentProvider {
 
-	private static final Logger logger = LoggerFactory.getLogger(ArchitectureDocService.class);
+	private static final Logger logger = LoggerFactory.getLogger(ArchitectureDocumentProvider.class);
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	/**
